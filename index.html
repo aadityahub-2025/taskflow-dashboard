@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for elegant UI icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header class="app-header">
+            <h1>My Tasks</h1>
+            <p id="date-display" class="date-subtitle"></p>
+        </header>
+
+        <div class="input-group">
+            <input type="text" id="task-input" placeholder="What needs to be done?" autocomplete="off">
+            <button id="add-btn" class="add-btn" aria-label="Add task">
+                <i class="ph ph-plus"></i>
+            </button>
+        </div>
+
+        <ul id="task-list" class="task-list">
+            <!-- Tasks will be injected here via JavaScript -->
+        </ul>
+        
+        <div class="stats-container">
+            <span id="task-count">0 tasks</span>
+            <button id="clear-completed" class="clear-btn">Clear completed</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
