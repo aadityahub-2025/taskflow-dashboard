@@ -1,47 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful To-Do List</title>
+    <title>TaskFlow | Student Productivity Dashboard</title>
+
     <link rel="stylesheet" href="style.css">
-    <!-- Using Inter font from Google Fonts -->
+
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- Phosphor Icons for elegant UI icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-</head>
-<body>
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-    <main class="app-container">
-        <header class="app-header">
-            <h1>My Tasks</h1>
-            <p id="date-display" class="date-subtitle"></p>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- ================= HEADER ================= -->
+
+        <header>
+
+            <div class="logo">
+                <h1>TaskFlow</h1>
+                <p>Plan Smart. Track Progress. Achieve More.</p>
+            </div>
+
+            <div class="header-right">
+
+                <div class="date-time">
+                    <h3 id="currentDate">Date</h3>
+                    <p id="currentTime">Time</p>
+                </div>
+
+                <button id="darkModeBtn">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+            </div>
+
         </header>
 
-        <div class="input-group">
-            <input type="text" id="task-input" placeholder="What needs to be done?" autocomplete="off">
-            <button id="add-btn" class="add-btn" aria-label="Add task">
-                <i class="ph ph-plus"></i>
-            </button>
-        </div>
+        <!-- ================= DASHBOARD CARDS ================= -->
 
-        <ul id="task-list" class="task-list">
-            <!-- Tasks will be injected here via JavaScript -->
-        </ul>
-        
-        <div class="stats-container">
-            <span id="task-count">0 tasks</span>
-            <button id="clear-completed" class="clear-btn">Clear completed</button>
-        </div>
-    </main>
+        <section class="cards">
+
+            <div class="card">
+                <h2>Total Tasks</h2>
+                <h1 id="totalTasks">0</h1>
+            </div>
+
+            <div class="card">
+                <h2>Completed</h2>
+                <h1 id="completedTasks">0</h1>
+            </div>
+
+            <div class="card">
+                <h2>Pending</h2>
+                <h1 id="pendingTasks">0</h1>
+            </div>
+
+            <div class="card">
+                <h2>Today's Tasks</h2>
+                <h1 id="todayTasks">0</h1>
+            </div>
+
+        </section>
+
+        <!-- ================= ANALYTICS ================= -->
+
+        <section class="analytics">
+
+            <div class="calendar-box">
+
+                <h2>Calendar</h2>
+
+                <div id="calendar">
+
+                </div>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Weekly Productivity</h2>
+
+                <canvas id="barChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Task Status</h2>
+
+                <canvas id="pieChart"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- ================= SEARCH ================= -->
+
+        <section class="search-section">
+
+            <input type="text" id="searchTask" placeholder="Search Task...">
+
+        </section>
+
+        <!-- ================= ADD TASK ================= -->
+
+        <section class="add-task">
+
+            <input type="text" id="taskInput" placeholder="Enter Task">
+
+            <select id="category">
+
+                <option>Study</option>
+
+                <option>Work</option>
+
+                <option>Personal</option>
+
+            </select>
+
+            <select id="priority">
+
+                <option>High</option>
+
+                <option>Medium</option>
+
+                <option>Low</option>
+
+            </select>
+
+            <input type="date" id="dueDate">
+
+            <button id="addTaskBtn">
+
+                Add Task
+
+            </button>
+
+        </section>
+
+        <!-- ================= TASK TABLE ================= -->
+
+        <section class="task-table">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>✔</th>
+
+                        <th>Task</th>
+
+                        <th>Category</th>
+
+                        <th>Priority</th>
+
+                        <th>Due Date</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="taskBody">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="script.js"></script>
+
 </body>
+
 </html>
