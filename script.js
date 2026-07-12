@@ -49,3 +49,21 @@ updateDateTime();
 
 // Updating time every second
 setInterval(updateDateTime, 1000);
+// ===============================
+// Task Form Elements
+// ===============================
+
+// ===============================
+// Task Form Elements
+// ===============================
+
+const taskInput = document.getElementById("taskInput");
+const categoryInput = document.getElementById("category");
+const priorityInput = document.getElementById("priority");
+const dueDateInput = document.getElementById("dueDate");
+const addTaskButton = document.getElementById("addTaskBtn");
+addTaskButton.addEventListener("click", function () {
+
+    console.log("Add Task Button Clicked");
+
+});
