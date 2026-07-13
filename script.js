@@ -49,9 +49,6 @@ updateDateTime();
 
 // Updating time every second
 setInterval(updateDateTime, 1000);
-// ===============================
-// Task Form Elements
-// ===============================
 
 // ===============================
 // Task Form Elements
@@ -62,8 +59,45 @@ const categoryInput = document.getElementById("category");
 const priorityInput = document.getElementById("priority");
 const dueDateInput = document.getElementById("dueDate");
 const addTaskButton = document.getElementById("addTaskBtn");
+
 addTaskButton.addEventListener("click", function () {
 
-    console.log("Add Task Button Clicked");
+    const task = taskInput.value.trim();
+    const category = categoryInput.value;
+    const priority = priorityInput.value;
+    const dueDate = dueDateInput.value;
+
+    if (task === "" || dueDate === "") {
+
+        alert("Please fill all required fields.");
+        return;
+
+    }
+
+    const taskData = {
+        task: task,
+        category: category,
+        priority: priority,
+        dueDate: dueDate
+    };
+
+    console.log(taskData);
+
+    const newRow = `
+        <tr>
+            <td><input type="checkbox"></td>
+            <td>${taskData.task}</td>
+            <td>${taskData.category}</td>
+            <td>${taskData.priority}</td>
+            <td>${taskData.dueDate}</td>
+            <td>Pending</td>
+            <td>Edit | Delete</td>
+        </tr>
+    `;
+
+    document.getElementById("taskBody").innerHTML += newRow;
+
+    taskInput.value = "";
+    dueDateInput.value = "";
 
 });
