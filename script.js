@@ -91,12 +91,29 @@ addTaskButton.addEventListener("click", function () {
             <td>${taskData.priority}</td>
             <td>${taskData.dueDate}</td>
             <td>Pending</td>
-            <td>Edit | Delete</td>
+            <td>
+                 <button class="edit-btn">Edit</button>
+                 <button class="delete-btn">Delete</button>
+            </td>
         </tr>
     `;
 
     document.getElementById("taskBody").innerHTML += newRow;
 
+    // Delete Button Functionality
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+
+    deleteButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            this.parentElement.parentElement.remove();
+
+        });
+
+    });
+
+    // Clear Input Fields
     taskInput.value = "";
     dueDateInput.value = "";
 
