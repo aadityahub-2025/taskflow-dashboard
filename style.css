@@ -359,3 +359,42 @@ footer {
     }
 
 }
+
+/* =========================
+   Dark Mode
+========================= */
+
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .container {
+    background: transparent;
+}
+
+.dark .card,
+.dark .calendar,
+.dark .analytics,
+.dark .task-table,
+.dark .add-task,
+.dark header {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark table th {
+    background: #2d2d2d;
+}
+
+.dark table td {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark input,
+.dark select {
+    background: #2d2d2d;
+    color: white;
+    border: 1px solid #555;
+}
