@@ -60,12 +60,88 @@ const todayTasks = document.getElementById("todayTasks");
 const darkModeBtn = document.getElementById("darkModeBtn");
 
 
+// =========================
+// Pie Chart
+// =========================
+
+
+
+function updatePieChart() {
+
+    let completed = 0;
+    let pending = 0;
+
+    for (let i = 0; i < tasks.length; i++) {
+
+        if (tasks[i].completed) {
+            completed++;
+        } else {
+            pending++;
+        }
+
+    }
+
+    const ctx = document.getElementById("pieChart");
+
+    if (pieChart) {
+        pieChart.destroy();
+    }
+
+    pieChart = new Chart(ctx, {
+
+        type: "pie",
+
+        data: {
+
+            labels: ["Completed", "Pending"],
+
+            datasets: [{
+
+                data: [completed, pending],
+
+                backgroundColor: [
+                    "#22c55e",
+                    "#ef4444"
+                ]
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom"
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+
 // ----------------------------
 // Global Variables
 // ----------------------------
 
 let tasks = [];
 let editIndex = -1;
+
+// =========================
+// Chart Variables
+// =========================
+
+let pieChart = null;
+let barChart = null;
 
 
 // ----------------------------
@@ -135,15 +211,25 @@ function displayTasks() {
                 <input type="checkbox" class="task-check" data-index="${i}" ${tasks[i].completed ? "checked" : ""}>
             </td>
 
-            <td>${tasks[i].task}</td>
+             <td class="${tasks[i].completed ? "completed-task" : ""}">
+    ${tasks[i].task}
+</td>
 
             <td>${tasks[i].category}</td>
 
-            <td>${tasks[i].priority}</td>
+             <td>
+    <span class="${tasks[i].priority.toLowerCase()}">
+        ${tasks[i].priority}
+    </span>
+</td>
 
             <td>${tasks[i].dueDate}</td>
 
-            <td>${status}</td>
+             <td>
+                <span class="status ${tasks[i].completed ? "completed" : "pending"}">
+                    ${status}
+                </span>
+            </td>
 
             <td>
 
@@ -171,6 +257,9 @@ function displayTasks() {
 
     addEditEvents();
 
+    updatePieChart();
+
+    updateBarChart();
 }
 
 
@@ -249,10 +338,15 @@ function addDeleteEvents() {
         button.addEventListener("click", function () {
 
             const index = this.dataset.index;
+            let confirmDelete = confirm("Are you sure you want to delete this task?");
 
-            tasks.splice(index, 1);
+            if (confirmDelete) {
 
-            displayTasks();
+                tasks.splice(index, 1);
+
+                displayTasks();
+
+            }
 
         });
 
@@ -385,3 +479,152 @@ darkModeBtn.addEventListener("click", function () {
     document.body.classList.toggle("dark");
 
 });
+// =========================
+// PIE CHART
+// =========================
+
+function updatePieChart() {
+
+    let completed = 0;
+    let pending = 0;
+
+    for (let i = 0; i < tasks.length; i++) {
+
+        if (tasks[i].completed) {
+            completed++;
+        }
+        else {
+            pending++;
+        }
+
+    }
+
+    const ctx = document.getElementById("pieChart");
+
+    if (pieChart != null) {
+        pieChart.destroy();
+    }
+
+    pieChart = new Chart(ctx, {
+
+        type: "pie",
+
+        data: {
+
+            labels: ["Completed", "Pending"],
+
+            datasets: [{
+
+                data: [completed, pending],
+
+                backgroundColor: [
+
+                    "#22c55e",
+                    "#ef4444"
+
+                ]
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    position: "bottom"
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+// =========================
+// WEEKLY BAR CHART
+// =========================
+
+function updateBarChart() {
+
+    let days = [0, 0, 0, 0, 0, 0, 0];
+
+    for (let i = 0; i < tasks.length; i++) {
+
+        if (tasks[i].dueDate != "") {
+
+            let date = new Date(tasks[i].dueDate);
+
+            let day = date.getDay();
+
+            days[day]++;
+
+        }
+
+    }
+
+    const ctx = document.getElementById("barChart");
+
+    if (barChart != null) {
+
+        barChart.destroy();
+
+    }
+
+    barChart = new Chart(ctx, {
+
+        type: "bar",
+
+        data: {
+
+            labels: [
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat"
+            ],
+
+            datasets: [{
+
+                label: "Tasks",
+
+                data: days
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        stepSize: 1
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
