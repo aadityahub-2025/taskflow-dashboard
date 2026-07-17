@@ -1,0 +1,29 @@
+{
+  "tasks": [
+    {
+      "task": "dsa",
+      "category": "Study",
+      "priority": "High",
+      "dueDate": "2026-07-18",
+      "completed": true,
+      "id": "2kFJqEYrrOI"
+    },
+    {
+      "task": "ml",
+      "category": "Personal",
+      "priority": "Low",
+      "dueDate": "2026-07-18",
+      "completed": true,
+      "id": "rkIgS6U_dV0"
+    },
+    {
+      "task": "oops",
+      "category": "Personal",
+      "priority": "High",
+      "dueDate": "2026-07-18",
+      "completed": true,
+      "id": "dEE0R6nAP6E"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
