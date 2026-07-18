@@ -1,15 +1,22 @@
 const API_URL = 'https://taskflow-dashboard-93nr.onrender.com/tasks';
 
 export const fetchTasks = async () => {
-    const res = await fetch(API_URL);
+    const token = localStorage.getItem("token");
+    const res = await fetch(API_URL, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
     if (!res.ok) throw new Error("Failed to fetch tasks");
     return res.json();
 };
 
 export const addTask = async (task) => {
+    const token = localStorage.getItem("token");
     const res = await fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(task)
     });
     if (!res.ok) throw new Error("Failed to add task");
@@ -17,9 +24,13 @@ export const addTask = async (task) => {
 };
 
 export const updateTask = async (id, updatedTask) => {
+    const token = localStorage.getItem("token");
     const res = await fetch(`${API_URL}/${id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify(updatedTask)
     });
     if (!res.ok) throw new Error("Failed to update task");
@@ -27,8 +38,10 @@ export const updateTask = async (id, updatedTask) => {
 };
 
 export const deleteTask = async (id) => {
+    const token = localStorage.getItem("token");
     const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${token}` }
     });
     if (!res.ok) throw new Error("Failed to delete task");
     return res.json();
